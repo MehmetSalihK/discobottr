@@ -1,3 +1,4 @@
+const disco = new Discord.Client();
 const prefix = config.prefix;
 const roles = config.roleToDisco;
 
