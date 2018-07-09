@@ -1,0 +1,34 @@
+const prefix = config.prefix;
+const roles = config.roleToDisco;
+
+disco.on("message", message => {    
+        function discoRole() {
+          let random = '#'+(Math.random()*0xFFFFFF<<0).toString(16);
+          roles.forEach((role) => {
+            let theRole = message.guild.roles.find("name", role);
+            theRole.edit({color: random}).catch(e => {
+              return message.channel.sendMessage(":x: **Error:** Belirttiğiniz rol `config.json` bu sunucuda bir rol değil, veya onun sahip olduğum en yüksek rolden daha yüksek bir rolü.");
+            });
+          });
+        }
+      
+        if(message.content.startsWith(prefix + "startdisco")) {
+            message.delete (30);
+                  if (message.member.hasPermission("ADMINISTRATOR")) {
+          setInterval(() => { discoRole(); }, config.ms);
+          message.channel.sendMessage("```css\nTÜRK DISCO Başlasın!...```");
+                  }
+      } else
+      
+      if(message.content.startsWith(prefix + "stopdisco")) {
+        message.delete (30);
+        if (message.member.hasPermission("ADMINISTRATOR")) {
+        message.channel.sendMessage("TÜRK DISCO Bitmiştir.");
+        setTimeout(() => { console.log(process.exit(0)); }, 300);
+        }
+      }
+      
+      });
+  
+      disco.login(config.token);
+  disco.login(config.token);
